@@ -1,6 +1,10 @@
+#%%
 import os
 from cryptography.fernet import Fernet
 
+print(os.path.abspath(__file__))
+
+#%%
 key = Fernet.generate_key()
 with open('chave.key', 'wb') as chave:
     chave.write(key)
